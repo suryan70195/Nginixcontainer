@@ -9,7 +9,7 @@ COPY ./src /app
 RUN npm install
 
 # Stage 2: Set up the Nginx server to serve the built app
-FROM nginx:alpine AS production-stage
+FROM nginx:latest AS production-stage
 
 # Remove the default Nginx welcome page
 RUN rm -rf /usr/share/nginx/html/*
