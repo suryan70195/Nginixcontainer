@@ -2,11 +2,18 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'your-docker-repo/nginx-app'  // Replace with your Docker repo
-        DOCKER_TAG = 'latest'  // You can use dynamic tags like 'v1.0'
+        DOCKER_IMAGE = 'kubersurya/nodejs'  
+        DOCKER_TAG = 'latest' 
     }
-
     stages {
+         stage('Clean Workspace') {
+            steps {
+                script {
+                    deleteDir()
+                    echo "Workspace cleaned"
+                }
+            }
+        }
         stage('Checkout') {
             steps {
                 git branch: 'main', credentialsId: 'suryachandu', url: 'https://github.com/suryan70195/Nginixcontainer.git'
@@ -34,7 +41,6 @@ pipeline {
         stage('Verify Container') {
             steps {
                 script {
-                    // Verify that the container is running (optional)
                     sh "docker ps"
                 }
             }
@@ -43,7 +49,6 @@ pipeline {
         stage('Clean Up') {
             steps {
                 script {
-                    // Clean up by stopping and removing the container
                     sh "docker stop nginx-container"
                     sh "docker rm nginx-container"
                 }
