@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout scm  // Checkout the source code from the repository
+                git branch: 'main', credentialsId: 'suryachandu', url: 'https://github.com/suryan70195/Nginixcontainer.git'
             }
         }
 
